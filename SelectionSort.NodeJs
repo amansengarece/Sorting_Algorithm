@@ -1,0 +1,39 @@
+function selectionSort(arr) {
+    const n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        // Finding the minimum element in the unsorted portion of the array
+        let min_index = i;
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_index]) {
+                min_index = j;
+            }
+        }
+        // Swap the found minimum element with the first element
+        if (i !== min_index) {
+            let temp = arr[i];
+            arr[i] = arr[min_index];
+            arr[min_index] = temp;
+        }
+    }
+    return arr;
+}
+
+function main() {
+    const readline = require('readline');
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("Enter the number of elements: ", function(n) {
+        n = parseInt(n);
+        rl.question("Enter the elements separated by spaces: ", function(input) {
+            const arr = input.split(" ").map(Number);
+            const sortedArr = selectionSort(arr);
+            console.log("Sorted array:", sortedArr.join(" "));
+            rl.close();
+        });
+    });
+}
+
+main();
